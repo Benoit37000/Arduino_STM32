@@ -50,7 +50,7 @@
 #define SDA PB7
 #define SCL PB6
 
-#define SOFT_STANDARD 27
+#define SOFT_STANDARD 19
 #define SOFT_FAST 0
 
 
@@ -86,7 +86,12 @@ class TwoWire : public WireBase {
      * Creates a Stop condition on the bus
      */
     void  i2c_stop();
-
+    
+    /*
+     * Created a Repeated Start condition on the bus
+     */
+    void i2c_repeated_start();
+    
     /*
      * Gets an ACK condition from a slave device on the bus
      */
@@ -111,11 +116,21 @@ class TwoWire : public WireBase {
      * Shifts out the data through SDA and clocks SCL for the slave device
      */
     void i2c_shift_out(uint8);
+	
+	
+
+	
  protected:
     /*
      * Processes the incoming I2C message defined by WireBase
      */
+    uint8 process(uint8);
     uint8 process();
+ private:
+	gpio_dev 	*sdaDevice;
+	uint8 		sdaBit;
+	gpio_dev 	*sclDevice;
+	uint8 		sclBit;	
  public:
     /*
      * Accept pin numbers for SCL and SDA lines. Set the delay needed
@@ -129,7 +144,14 @@ class TwoWire : public WireBase {
      * .begin(uint8) in WireBase
      */
     void begin(uint8 = 0x00);
+	
+	void setClock(uint32_t frequencyHz);
 
+    /*
+     * Sets pins SDA and SCL to INPUT
+     */
+	void end();	
+	
     /*
      * If object is destroyed, set pin numbers to 0.
      */
