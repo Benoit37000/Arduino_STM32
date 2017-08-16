@@ -447,7 +447,6 @@ genericSTM32F103C.menu.opt.ogstd=Debug (-g)
 genericSTM32F103C.menu.opt.o3lto.build.flags.ldspecs=-flto
 genericSTM32F103C.menu.opt.ogstd.build.flags.optimize=-Og
 genericSTM32F103C.menu.opt.ogstd.build.flags.ldspecs=
->>>>>>> 33411b6e946dc0fc71420420f847c6bac6ce2aad
 
 ########################### Generic STM32F103R ###########################
 
