@@ -227,7 +227,9 @@ extern "C" {
 #    define STM32_PCLK2                     F_CPU
 #    endif
 #    ifndef STM32_DELAY_US_MULT
-#		define STM32_DELAY_US_MULT 				(F_CPU / 6000000L)
+//      Adjust delay for different wait states
+#		define STM32_DELAY_US_MULT 				(F_CPU > 48000000L ? F_CPU / 6000000L : \
+                                                 F_CPU > 24000000L ? F_CPU / 4000000L : F_CPU / 3000000L)
 #    endif
 #elif STM32_F1_LINE == STM32_F1_LINE_VALUE        /* TODO */
 #    ifndef STM32_PCLK1
